@@ -6,13 +6,10 @@ Created on Mon Jul  3 14:59:48 2017
 @author: iamorlando
 """
 
+from flask import Flask, Response, request
 
-from flask import Flask
-from flask import request
+
 from ballot_api import get_representatives
-from flask import Response
-
-
 
 app = Flask(__name__)
 

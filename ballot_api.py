@@ -6,7 +6,7 @@ Created on Mon Jul  3 14:59:48 2017
 @author: iamorlando
 """
 
-import requests
+from requests import request
 from json import loads as to_dict
 from json import dumps as to_json
 
@@ -16,7 +16,7 @@ api_key = 'AIzaSyDRalwUxSfckOC3_9FcgdmI0YdKkxFMdu8'
 
 def http_get(endpoint, params):
     params['key'] = api_key
-    response = requests.request("GET", base_url+endpoint, params=params)
+    response = request("GET", base_url+endpoint, params=params)
     print(response.url)
     print(response.text)
     return response.text
