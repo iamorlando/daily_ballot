@@ -11,11 +11,10 @@ from json import loads as to_dict
 from json import dumps as to_json
 
 base_url = 'https://www.googleapis.com/civicinfo/v2/'
-api_key = 'AIzaSyDRalwUxSfckOC3_9FcgdmI0YdKkxFMdu8'
+
 
 
 def http_get(endpoint, params):
-    params['key'] = api_key
     response = request("GET", base_url+endpoint, params=params)
     print(response.url)
     print(response.text)
@@ -23,7 +22,7 @@ def http_get(endpoint, params):
 
 
 
-def call_civic_api_representatives(address, levels, *,
+def call_civic_api_representatives(key,address, levels, *,
                         roles=["deputyHeadOfGovernment",
                                   "executiveCouncil",
                                   "governmentOfficer",
@@ -45,6 +44,7 @@ def call_civic_api_representatives(address, levels, *,
     lists all representatives, their offices, for a given address
     """
     params = {'address': address}
+    params['key'] = key
     params['roles'] = roles
     params['includeOffices']='true'
     params['levels'] = levels
@@ -63,7 +63,7 @@ def make_representatives(offices_officials_dict):
     return rep_list
 
 
-def get_representatives(address, levels, *,
+def get_representatives(address, levels,key, *,
                         roles=["deputyHeadOfGovernment",
                                   "executiveCouncil",
                                   "governmentOfficer",
@@ -77,7 +77,7 @@ def get_representatives(address, levels, *,
                                   "specialPurposeOfficer"]
                         ):
     fields_ = ["officials","offices"]
-    res = call_civic_api_representatives(address,
+    res = call_civic_api_representatives(key,address,
                                                    levels, roles=roles,
                                                    fields=fields_)
     #print (res)

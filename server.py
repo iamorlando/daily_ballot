@@ -19,8 +19,9 @@ def representatives():
     data = request.get_json()
     address = data['address']
     levels = data['levels']
+    key = data['key']
     response = Response(get_representatives(address,
-                        levels))
+                        levels,key))
     response.headers = {'Content-Type': 'application/json'}
     return response
 
